@@ -1,0 +1,21 @@
+.home-page {
+    height: 100%;
+
+    .header {
+        background: #fff;
+        padding: 0;
+    }
+
+    .content {
+        margin: 24px 16px 0;
+        .content-text {
+            padding: 24px;
+            background: #fff;
+            min-height: 360px;
+        }
+    }
+
+    .footer {
+        text-align: center;
+    }
+}
