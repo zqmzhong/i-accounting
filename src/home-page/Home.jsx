@@ -1,13 +1,16 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { Icon } from '@ant-design/compatible';
-import styles from './Home.module.css';
+import Title from '../menu-title/Title'
+import styles from './Home.module.scss';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
+    const icon = (<Icon type="plus" />);
+
     return (
-        <Layout className={styles.homePage}>
+        <Layout className={styles['home-page']}>
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
@@ -18,8 +21,11 @@ function Home() {
                     console.log(collapsed, type);
                 }}
             >
-                <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+                <Title></Title>
+                <Button type="primary" shape="round" icon={icon} size="large">
+                    添加交易
+                </Button>
+                <Menu theme="dark" mode="inline">
                     <Menu.Item key="1">
                         <Icon type="user" />
                         <span className="nav-text">nav 1</span>
@@ -39,11 +45,15 @@ function Home() {
                 </Menu>
             </Sider>
             <Layout>
-                <Header style={{ background: '#fff', padding: 0 }} />
-                <Content style={{ margin: '24px 16px 0' }}>
-                    <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Hello, i-accounting !</div>
+                <Header className={styles['header']} />
+                <Content className={styles['content']}>
+                    <div className={styles['content-text']}>
+                        Hello, i-accounting !
+                    </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer className={styles['footer']}>
+                    i-accounting ©2020
+                </Footer>
             </Layout>
         </Layout>
     );
