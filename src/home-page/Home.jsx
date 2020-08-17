@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Layout, Menu } from 'antd';
-import { Icon } from '@ant-design/compatible';
-import Title from '../menu-title/Title'
+import { PlusOutlined, UserOutlined } from '@ant-design/icons';
+import Title from '../menu-title/Title';
+import AddDealModal from '../add-deal-modal/AddDealModal';
 import styles from './Home.module.scss';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
-    const icon = (<Icon type="plus" />);
+    const [ showAddDealModal, setShowAddDealModal ] = useState(false);
 
     return (
         <Layout className={styles['home-page']}>
@@ -22,25 +23,38 @@ function Home() {
                 }}
             >
                 <Title></Title>
-                <Button type="primary" shape="round" icon={icon} size="large">
+
+                <Button
+                    type="primary"
+                    shape="round"
+                    icon={(<PlusOutlined />)} 
+                    size="large"
+                    onClick={() => setShowAddDealModal(true)}
+                >
                     添加交易
                 </Button>
+
+                <AddDealModal
+                    visible={showAddDealModal}
+                    onClose={() => setShowAddDealModal(false)}
+                />
+
                 <Menu theme="dark" mode="inline">
                     <Menu.Item key="1">
-                        <Icon type="user" />
-                        <span className="nav-text">nav 1</span>
+                        <UserOutlined />
+                        <span>nav 1</span>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Icon type="video-camera" />
-                        <span className="nav-text">nav 2</span>
+                        <UserOutlined />
+                        <span>nav 2</span>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Icon type="upload" />
-                        <span className="nav-text">nav 3</span>
+                        <UserOutlined />
+                        <span>nav 3</span>
                     </Menu.Item>
                     <Menu.Item key="4">
-                        <Icon type="user" />
-                        <span className="nav-text">nav 4</span>
+                        <UserOutlined />
+                        <span>nav 4</span>
                     </Menu.Item>
                 </Menu>
             </Sider>
