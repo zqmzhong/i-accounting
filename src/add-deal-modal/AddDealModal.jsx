@@ -1,24 +1,17 @@
-import React from 'react';
-import { Modal, Form, Radio, Input } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Form, Radio, Space } from 'antd';
+import IncomeExpendForm from '../income-expend-form/income-expend-form';
 import styles from './AddDealModal.module.scss';
 
 function AddDealModal(props) {
     const { visible, onClose } = props;
 
-    const formItemLayout = {
-        labelCol: { span: 4 },
-        wrapperCol: { span: 24 },
-    };
-
-    const state = {
-        ModalText: 'Content of the modal',
-        confirmLoading: false,
-    };
+    const [ tabId, setTabId ] = useState('expend');
+    const [ confirmLoading, setConfirmLoading ] = useState(false);
 
     const handleCancel = () => {
         onClose();
     };
-
     const handleOk = () => {
         onClose();
     };
@@ -28,32 +21,29 @@ function AddDealModal(props) {
             title="添加交易"
             visible={visible}
             onOk={handleOk}
-            confirmLoading={state.confirmLoading}
+            confirmLoading={confirmLoading}
             onCancel={handleCancel}
         >
-            <Form layout={"horizontal"}>
-                <Form.Item {...formItemLayout} className={styles["type-tabs"]}>
+            <Space direction="vertical" size="middle" className={styles["modal-content"]}>
+                <div className={styles["type-tabs"]}>
                     <Radio.Group 
                         defaultValue="expend"
                         buttonStyle="solid"
-                        onChange={() => console.log("change")}
+                        onChange={(e) => {
+                            console.log(e);
+                            setTabId(e.target.value);
+                        }}
                     >
                         <Radio.Button value="expend"> 支出 </Radio.Button>
                         <Radio.Button value="income"> 收入 </Radio.Button>
                         <Radio.Button value="transfer"> 转账 </Radio.Button>
                     </Radio.Group>
-                </Form.Item>
+                </div>
 
-                <Form.Item label="金额" {...formItemLayout}>
-                    <Input prefix="￥" suffix="RMB" />
-                </Form.Item>
-                <Form.Item label="分类" {...formItemLayout}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="账户" {...formItemLayout}>
-                    <Input />
-                </Form.Item>
-            </Form>
+                <Form layout={"horizontal"}>
+                    <IncomeExpendForm tabId={tabId} />
+                </Form>
+            </Space>
         </Modal>
     );
 }
