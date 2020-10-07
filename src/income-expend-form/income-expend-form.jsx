@@ -1,6 +1,6 @@
 import React from 'react';
 import day from 'dayjs';
-import { Form, Input, DatePicker, TimePicker, Space, Select } from 'antd';
+import { Form, Input, DatePicker, Select } from 'antd';
 
 const { TextArea } = Input;
 
@@ -11,28 +11,25 @@ function IncomeExpendForm(props) {
         labelCol: { span: 4 },
         wrapperCol: { span: 24 },
     };
-    const dateFormat = 'YYYY-MM-DD';
+    const dateFormat = 'YYYY-MM-DD HH:mm';
     const timeFormat = 'HH:mm';
 
     if (tabId === 'expend') {
         return (
             <div>
-                <Form.Item label="金额" {...formItemLayout}>
+                <Form.Item name="amount" label="金额" {...formItemLayout}>
                     <Input prefix="￥" suffix="RMB" />
                 </Form.Item>
-                <Form.Item label="分类" {...formItemLayout}>
+                <Form.Item name="category" label="分类" {...formItemLayout}>
                     <Select />
                 </Form.Item>
-                <Form.Item label="账户" {...formItemLayout}>
+                <Form.Item name="account" label="账户" {...formItemLayout}>
                     <Select />
                 </Form.Item>
-                <Form.Item label="时间" {...formItemLayout}>
-                    <Space>
-                        <DatePicker defaultValue={day()} format={dateFormat} />
-                        <TimePicker defaultValue={day()} format={timeFormat} />
-                    </Space>
+                <Form.Item name="time" label="时间" {...formItemLayout} initialValue={day()}>
+                    <DatePicker showTime={{ format: timeFormat }} format={dateFormat} />
                 </Form.Item>
-                <Form.Item label="备注" {...formItemLayout}>
+                <Form.Item name="note" label="备注" {...formItemLayout}>
                     <TextArea allowClear />
                 </Form.Item>
             </div>

@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { Modal, Form, Radio, Space } from 'antd';
+import { useRequest } from 'ahooks';
 import IncomeExpendForm from '../income-expend-form/income-expend-form';
 import styles from './AddDealModal.module.scss';
 
 function AddDealModal(props) {
+    const [ form ] = Form.useForm();
     const { visible, onClose } = props;
 
     const [ tabId, setTabId ] = useState('expend');
-    const [ confirmLoading, setConfirmLoading ] = useState(false);
 
-    const handleCancel = () => {
-        onClose();
-    };
-    const handleOk = () => {
+    const { loading, run } = useRequest((data) => ({
+        url: "/bill",
+        method: "post",
+        body: JSON.stringify(data),
+    }), { manual: true });
+
+    const onSubmit = async (fieldsValue) => {
+        const values = {
+            ...fieldsValue,
+            time: fieldsValue.time.format('YYYY-MM-DD HH:mm'),
+        };
+        await run(values);
         onClose();
     };
 
@@ -20,19 +29,16 @@ function AddDealModal(props) {
         <Modal
             title="添加交易"
             visible={visible}
-            onOk={handleOk}
-            confirmLoading={confirmLoading}
-            onCancel={handleCancel}
+            confirmLoading={loading}
+            onCancel={() => onClose()}
+            onOk={() => form.submit()}
         >
             <Space direction="vertical" size="middle" className={styles["modal-content"]}>
                 <div className={styles["type-tabs"]}>
                     <Radio.Group 
                         defaultValue="expend"
                         buttonStyle="solid"
-                        onChange={(e) => {
-                            console.log(e);
-                            setTabId(e.target.value);
-                        }}
+                        onChange={(e) => setTabId(e.target.value)}
                     >
                         <Radio.Button value="expend"> 支出 </Radio.Button>
                         <Radio.Button value="income"> 收入 </Radio.Button>
@@ -40,7 +46,7 @@ function AddDealModal(props) {
                     </Radio.Group>
                 </div>
 
-                <Form layout={"horizontal"}>
+                <Form form={form} layout={"horizontal"} onFinish={onSubmit}>
                     <IncomeExpendForm tabId={tabId} />
                 </Form>
             </Space>
