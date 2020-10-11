@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useBoolean } from 'ahooks';
 import { Button, Layout, Menu } from 'antd';
 import { PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Title from '../menu-title/Title';
 import AddDealModal from '../add-deal-modal/AddDealModal';
+import BillList from '../bill-list/BillList';
 import styles from './Home.module.scss';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
-    const [ showAddDealModal, setShowAddDealModal ] = useState(false);
+    const [ showAddDealModal, { setTrue, setFalse }] = useBoolean(false);
 
     return (
         <Layout className={styles['home-page']}>
@@ -29,14 +31,14 @@ function Home() {
                     shape="round"
                     icon={(<PlusOutlined />)} 
                     size="large"
-                    onClick={() => setShowAddDealModal(true)}
+                    onClick={setTrue}
                 >
                     添加交易
                 </Button>
 
                 <AddDealModal
                     visible={showAddDealModal}
-                    onClose={() => setShowAddDealModal(false)}
+                    onClose={setFalse}
                 />
 
                 <Menu theme="dark" mode="inline">
@@ -61,9 +63,9 @@ function Home() {
             <Layout>
                 <Header className={styles['header']} />
                 <Content className={styles['content']}>
-                    <div className={styles['content-text']}>
-                        Hello, i-accounting !
-                    </div>
+                    <section className={styles['bill-list']}>
+                        <BillList />
+                    </section>
                 </Content>
                 <Footer className={styles['footer']}>
                     i-accounting ©2020
