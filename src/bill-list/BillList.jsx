@@ -6,7 +6,7 @@ function BillList(props) {
     const [ billList, setBillList ] = useState([]);
 
     const { loading } = useRequest((data) => ({
-        url: '/api/bill',
+        url: '/bill',
         method: 'get',
     }), {
         onSuccess: (result) => setBillList(result),

@@ -11,7 +11,7 @@ function AddDealModal(props) {
     const [ tabId, setTabId ] = useState('expend');
 
     const { loading, run } = useRequest((data) => ({
-        url: '/api/bill',
+        url: '/bill',
         method: 'post',
         body: JSON.stringify(data),
     }), { manual: true });
