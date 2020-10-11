@@ -2,11 +2,11 @@
   "name": "i-accounting",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://b3g4ozaf1k.execute-api.ap-northeast-1.amazonaws.com/Prod",
   "dependencies": {
     "ahooks": "^2.6.1",
     "antd": "^4.5.2",
     "dayjs": "^1.8.32",
+    "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
