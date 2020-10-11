@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Form, Radio, Space } from 'antd';
 import { useRequest } from 'ahooks';
-import IncomeExpendForm from '../income-expend-form/income-expend-form';
+import { Modal, Form, Radio, Space } from 'antd';
+import IncomeExpendForm from '../income-expend-form/IncomeExpendForm';
 import styles from './AddDealModal.module.scss';
 
 function AddDealModal(props) {
@@ -11,8 +11,8 @@ function AddDealModal(props) {
     const [ tabId, setTabId ] = useState('expend');
 
     const { loading, run } = useRequest((data) => ({
-        url: "/bill",
-        method: "post",
+        url: '/bill',
+        method: 'post',
         body: JSON.stringify(data),
     }), { manual: true });
 
