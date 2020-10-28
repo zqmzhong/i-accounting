@@ -6,6 +6,7 @@
   "dependencies": {
     "ahooks": "^2.6.1",
     "antd": "^4.5.2",
+    "aws-amplify": "^3.3.4",
     "dayjs": "^1.8.32",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
