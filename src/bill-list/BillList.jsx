@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import { List, Skeleton } from 'antd';
+import { BASE_URL } from '../common/BaseUrl';
 
 function BillList(props) {
     const [ billList, setBillList ] = useState([]);
 
     const { loading } = useRequest((data) => ({
-        url: '/api/bills',
+        url: BASE_URL + '/bills',
         method: 'get',
     }), {
         onSuccess: (result) => setBillList(result),
