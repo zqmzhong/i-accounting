@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import { List, Skeleton } from 'antd';
-import { BASE_URL } from '../common/BaseUrl';
+import BASE_URL from '../common/BaseUrl';
 
 function BillList(props) {
     const [ billList, setBillList ] = useState([]);

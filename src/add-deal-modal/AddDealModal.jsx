@@ -3,6 +3,7 @@ import { useRequest } from 'ahooks';
 import { Modal, Form, Radio, Space } from 'antd';
 import IncomeExpendForm from '../income-expend-form/IncomeExpendForm';
 import styles from './AddDealModal.module.scss';
+import BASE_URL from '../common/BaseUrl';
 
 function AddDealModal(props) {
     const [ form ] = Form.useForm();
@@ -11,12 +12,14 @@ function AddDealModal(props) {
     const [ tabId, setTabId ] = useState('expend');
 
     const { loading, run } = useRequest((data) => ({
-        url: '/api/bill',
+        url: BASE_URL + '/bill',
         method: 'post',
         body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
     }), { manual: true });
 
     const onSubmit = async (fieldsValue) => {
+        console.log('fieldsValue: ', fieldsValue);
         const values = {
             ...fieldsValue,
             time: fieldsValue.time.format('YYYY-MM-DD HH:mm'),
