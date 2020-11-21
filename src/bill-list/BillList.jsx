@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
-import { List, Skeleton } from 'antd';
+import { Button, List, Skeleton } from 'antd';
 import BASE_URL from '../common/BaseUrl';
 
 function BillList(props) {
     const [ billList, setBillList ] = useState([]);
 
-    const { loading } = useRequest((data) => ({
+    const { loading, run: refreshList } = useRequest(() => ({
         url: BASE_URL + '/bills',
         method: 'get',
     }), {
         onSuccess: (result) => setBillList(result),
     });
+
+    const { run: deleteItem } = useRequest((data) => ({
+        url: BASE_URL + '/bill',
+        method: 'delete',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+    }), { manual: true });
+
+    const deleteBill = async (item) => {
+        console.log(item);
+        await deleteItem([item.id]);
+        refreshList();
+    };
 
 
     return (
@@ -22,8 +35,10 @@ function BillList(props) {
             dataSource={billList}
             renderItem={item => (
                 <List.Item
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                    actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
+                    actions={[
+                        <Button type="link">编辑</Button>,
+                        <Button type="link" onClick={() => deleteBill(item)}>删除</Button>
+                    ]}
                 >
                     <Skeleton avatar title={false} loading={item.loading} active>
                         <List.Item.Meta
