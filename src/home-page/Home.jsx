@@ -1,16 +1,26 @@
-import React from 'react';
-import { useBoolean } from 'ahooks';
+import React, { useState } from 'react';
+import { useBoolean, useRequest } from 'ahooks';
 import { Button, Layout, Menu } from 'antd';
 import { PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Title from '../menu-title/Title';
 import AddDealModal from '../add-deal-modal/AddDealModal';
 import BillList from '../bill-list/BillList';
 import styles from './Home.module.scss';
+import BASE_URL from '../common/BaseUrl';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
     const [ showAddDealModal, { setTrue, setFalse }] = useBoolean(false);
+
+    const [ billList, setBillList ] = useState([]);
+
+    const { loading, run: refreshList } = useRequest(() => ({
+        url: BASE_URL + '/bills',
+        method: 'get',
+    }), {
+        onSuccess: (result) => setBillList(result),
+    });
 
     return (
         <Layout className={styles['home-page']}>
@@ -38,6 +48,7 @@ function Home() {
 
                 <AddDealModal
                     visible={showAddDealModal}
+                    refreshList={refreshList}
                     onClose={setFalse}
                 />
 
@@ -64,7 +75,7 @@ function Home() {
                 <Header className={styles['header']} />
                 <Content className={styles['content']}>
                     <section className={styles['bill-list']}>
-                        <BillList />
+                        <BillList isListLoading={loading} billList={billList} refreshList={refreshList} />
                     </section>
                 </Content>
                 <Footer className={styles['footer']}>

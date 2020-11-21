@@ -7,7 +7,7 @@ import BASE_URL from '../common/BaseUrl';
 
 function AddDealModal(props) {
     const [ form ] = Form.useForm();
-    const { visible, onClose } = props;
+    const { visible, refreshList, onClose } = props;
 
     const [ tabId, setTabId ] = useState('expend');
 
@@ -25,6 +25,7 @@ function AddDealModal(props) {
             time: fieldsValue.time.format('YYYY-MM-DD HH:mm'),
         };
         await run(values);
+        refreshList();
         onClose();
     };
 
