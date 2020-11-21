@@ -5,7 +5,7 @@ import { Form, Input, DatePicker, Select } from 'antd';
 const { TextArea } = Input;
 
 function IncomeExpendForm(props) {
-    const { tabId } = props;
+    const { tabId, billInfo } = props;
 
     const formItemLayout = {
         labelCol: { span: 4 },
@@ -24,7 +24,7 @@ function IncomeExpendForm(props) {
         console.log(value);
     };
 
-    if (tabId === 'expend') {
+    if (tabId === 'expend' || tabId === 'income') {
         return (
             <div>
                 <Form.Item name="amount" label="金额" {...formItemLayout}>

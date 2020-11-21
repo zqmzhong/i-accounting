@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useBoolean, useRequest } from 'ahooks';
+import { useToggle, useRequest } from 'ahooks';
 import { Button, Layout, Menu } from 'antd';
 import { PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Title from '../menu-title/Title';
-import AddDealModal from '../add-deal-modal/AddDealModal';
+import BillModal from '../bill-modal/BillModal';
 import BillList from '../bill-list/BillList';
 import styles from './Home.module.scss';
 import BASE_URL from '../common/BaseUrl';
@@ -11,7 +11,8 @@ import BASE_URL from '../common/BaseUrl';
 const { Header, Content, Footer, Sider } = Layout;
 
 function Home() {
-    const [ showAddDealModal, { setTrue, setFalse }] = useBoolean(false);
+    const [ isShowBillModal, { toggle: showBillModal }] = useToggle(false);
+    const [ billInfo, setBillInfo ] = useState({});
 
     const [ billList, setBillList ] = useState([]);
 
@@ -21,6 +22,12 @@ function Home() {
     }), {
         onSuccess: (result) => setBillList(result),
     });
+
+    const onEdit = (item) => {
+        console.log('item: ', item);
+        setBillInfo(item);
+        showBillModal(true);
+    };
 
     return (
         <Layout className={styles['home-page']}>
@@ -41,15 +48,16 @@ function Home() {
                     shape="round"
                     icon={(<PlusOutlined />)} 
                     size="large"
-                    onClick={setTrue}
+                    onClick={() => showBillModal(true)}
                 >
                     添加交易
                 </Button>
 
-                <AddDealModal
-                    visible={showAddDealModal}
+                <BillModal
+                    visible={isShowBillModal}
+                    billInfo={billInfo}
                     refreshList={refreshList}
-                    onClose={setFalse}
+                    onClose={() => showBillModal(false)}
                 />
 
                 <Menu theme="dark" mode="inline">
@@ -75,7 +83,7 @@ function Home() {
                 <Header className={styles['header']} />
                 <Content className={styles['content']}>
                     <section className={styles['bill-list']}>
-                        <BillList isListLoading={loading} billList={billList} refreshList={refreshList} />
+                        <BillList isListLoading={loading} billList={billList} refreshList={refreshList} onEdit={onEdit} />
                     </section>
                 </Content>
                 <Footer className={styles['footer']}>

@@ -4,7 +4,7 @@ import { Button, List, Skeleton } from 'antd';
 import BASE_URL from '../common/BaseUrl';
 
 function BillList(props) {
-    const { isListLoading, billList, refreshList } = props;
+    const { isListLoading, billList, refreshList, onEdit } = props;
 
     const { loading: isDeleting, run: deleteItem } = useRequest((param) => ({
         url: BASE_URL + '/bill',
@@ -27,7 +27,7 @@ function BillList(props) {
             renderItem={item => (
                 <List.Item
                     actions={[
-                        <Button type="link">编辑</Button>,
+                        <Button type="link" onClick={() => onEdit(item)}>编辑</Button>,
                         <Button type="link" onClick={() => deleteBill(item)}>删除</Button>
                     ]}
                 >

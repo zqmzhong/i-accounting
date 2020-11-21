@@ -2,25 +2,26 @@ import React, { useState } from 'react';
 import { useRequest } from 'ahooks';
 import { Modal, Form, Radio, Space } from 'antd';
 import IncomeExpendForm from '../income-expend-form/IncomeExpendForm';
-import styles from './AddDealModal.module.scss';
+import styles from './BillModal.module.scss';
 import BASE_URL from '../common/BaseUrl';
 
 function AddDealModal(props) {
     const [ form ] = Form.useForm();
-    const { visible, refreshList, onClose } = props;
+    const { visible, billInfo, refreshList, onClose } = props;
+    form.setFieldsValue(billInfo);
 
     const [ tabId, setTabId ] = useState('expend');
 
-    const { loading, run } = useRequest((data) => ({
+    const { loading, run } = useRequest((param) => ({
         url: BASE_URL + '/bill',
         method: 'post',
-        body: JSON.stringify(data),
+        body: JSON.stringify(param),
         headers: { 'Content-Type': 'application/json' },
     }), { manual: true });
 
     const onSubmit = async (fieldsValue) => {
-        console.log('fieldsValue: ', fieldsValue);
         const values = {
+            type: tabId,
             ...fieldsValue,
             time: fieldsValue.time.format('YYYY-MM-DD HH:mm'),
         };
@@ -51,7 +52,7 @@ function AddDealModal(props) {
                 </div>
 
                 <Form form={form} layout={"horizontal"} onFinish={onSubmit}>
-                    <IncomeExpendForm tabId={tabId} />
+                    <IncomeExpendForm tabId={tabId} billInfo={billInfo} />
                 </Form>
             </Space>
         </Modal>
