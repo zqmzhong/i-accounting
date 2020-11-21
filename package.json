@@ -2,30 +2,27 @@
   "name": "i-accounting",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "ahooks": "^2.6.1",
-    "antd": "^4.5.2",
-    "dayjs": "^1.8.32",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "antd-dayjs-webpack-plugin": "^1.0.1",
-    "customize-cra": "^1.0.0",
-    "node-sass": "^4.14.1",
-    "react-app-rewired": "^2.1.6",
-    "react-scripts": "3.4.1",
-    "source-map-explorer": "^2.5.0"
-  },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer build/static/js/*"
+  },
+  "dependencies": {
+    "ahooks": "^2.9.1",
+    "antd": "^4.8.4",
+    "dayjs": "^1.9.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "antd-dayjs-webpack-plugin": "^1.0.1",
+    "customize-cra": "^1.0.0",
+    "node-sass": "^4.14.1",
+    "react-app-rewired": "^2.1.6",
+    "react-scripts": "^4.0.0",
+    "source-map-explorer": "^2.5.0"
   },
   "eslintConfig": {
     "extends": "react-app"
