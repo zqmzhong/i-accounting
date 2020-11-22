@@ -24,7 +24,6 @@ function Home() {
     });
 
     const onEdit = (item) => {
-        console.log('item: ', item);
         setBillInfo(item);
         showBillModal(true);
     };

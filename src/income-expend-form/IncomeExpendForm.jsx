@@ -5,7 +5,7 @@ import { Form, Input, DatePicker, Select } from 'antd';
 const { TextArea } = Input;
 
 function IncomeExpendForm(props) {
-    const { tabId, billInfo } = props;
+    const { tabId } = props;
 
     const formItemLayout = {
         labelCol: { span: 4 },
@@ -16,12 +16,10 @@ function IncomeExpendForm(props) {
 
     const handleChangeCategory = (value) => {
         // TODO: support add new category item
-        console.log(value);
     };
 
     const handleChangeAccount = (value) => {
         // TODO: support add new category account
-        console.log(value);
     };
 
     if (tabId === 'expend' || tabId === 'income') {
