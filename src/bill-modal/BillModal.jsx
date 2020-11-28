@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useRequest } from 'ahooks';
-import { Modal, Form, Radio, Space } from 'antd';
+import { Modal, Form, Space } from 'antd';
 import { isEmpty } from 'lodash';
 import day from 'dayjs';
+import styled from 'styled-components';
+import DealTypeTab from '../components/DealTypeTab';
 import IncomeExpendForm from '../income-expend-form/IncomeExpendForm';
-import styles from './BillModal.module.scss';
 import BASE_URL from '../common/BaseUrl';
+
+const ModalContent = styled(Space)`
+    width: 100%;
+`;
 
 function BillModal(props) {
     const { visible, billInfo, refreshList, onClose } = props;
@@ -65,23 +70,12 @@ function BillModal(props) {
             onCancel={() => onClose()}
             onOk={() => form.submit()}
         >
-            <Space direction="vertical" size="middle" className={styles["modal-content"]}>
-                <div className={styles["type-tabs"]}>
-                    <Radio.Group 
-                        defaultValue="expend"
-                        buttonStyle="solid"
-                        onChange={(e) => setTabId(e.target.value)}
-                    >
-                        <Radio.Button value="expend"> 支出 </Radio.Button>
-                        <Radio.Button value="income"> 收入 </Radio.Button>
-                        <Radio.Button value="transfer"> 转账 </Radio.Button>
-                    </Radio.Group>
-                </div>
-
+            <ModalContent direction="vertical" size="middle">
+                <DealTypeTab onChange={(e) => setTabId(e.target.value)} />
                 <Form form={form} layout={"horizontal"} onFinish={onSubmit}>
                     <IncomeExpendForm tabId={tabId} />
                 </Form>
-            </Space>
+            </ModalContent>
         </Modal>
     );
 }
