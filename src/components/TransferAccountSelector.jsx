@@ -9,7 +9,6 @@ const AccountSelect = styled(Select)`
         width: calc((100% - 30px) / 2);
     }
 `;
-
 const ArrowWithSpace = styled(ArrowRightOutlined)`
     margin: 0 8px;
 `;

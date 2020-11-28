@@ -1,7 +1,7 @@
 import { Radio } from 'antd';
 import styled from 'styled-components';
 
-const TabWrapper = styled.div`
+const TabWrapper = styled('div')`
     text-align: center;
 `;
 
