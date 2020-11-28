@@ -1,6 +1,7 @@
 import React from 'react';
 import day from 'dayjs';
 import { Form, Input, DatePicker, Select } from 'antd';
+import TransferAccountSelector from '../components/TransferAccountSelector';
 
 const { TextArea } = Input;
 
@@ -22,29 +23,30 @@ function IncomeExpendForm(props) {
         // TODO: support add new category account
     };
 
-    if (tabId === 'expend' || tabId === 'income') {
-        return (
-            <div>
-                <Form.Item name="amount" label="金额" {...formItemLayout}>
-                    <Input prefix="￥" suffix="RMB" />
-                </Form.Item>
-                <Form.Item name="category" label="分类" {...formItemLayout}>
-                    <Select mode="tags" showArrow onChange={handleChangeCategory} />
-                </Form.Item>
-                <Form.Item name="account" label="账户" {...formItemLayout}>
-                    <Select mode="tags" showArrow onChange={handleChangeAccount} />
-                </Form.Item>
-                <Form.Item name="time" label="时间" {...formItemLayout} initialValue={day()}>
-                    <DatePicker showTime={{ format: timeFormat }} format={dateFormat} />
-                </Form.Item>
-                <Form.Item name="note" label="备注" {...formItemLayout}>
-                    <TextArea allowClear />
-                </Form.Item>
-            </div>
-        );
+    let accountSelector = <Select mode="tags" showArrow onChange={handleChangeAccount} />;
+    if (tabId === 'transfer') {
+        accountSelector = <TransferAccountSelector onChange={handleChangeAccount} />;
     }
 
-    return (<div />);
+    return (
+        <div>
+            <Form.Item name="amount" label="金额" {...formItemLayout}>
+                <Input prefix="￥" suffix="RMB" />
+            </Form.Item>
+            <Form.Item name="account" label="账户" {...formItemLayout}  >
+                {accountSelector}
+            </Form.Item>
+            <Form.Item name="category" label="分类" {...formItemLayout}>
+                <Select mode="tags" showArrow onChange={handleChangeCategory} />
+            </Form.Item>
+            <Form.Item name="time" label="时间" {...formItemLayout} initialValue={day()}>
+                <DatePicker showTime={{ format: timeFormat }} format={dateFormat} />
+            </Form.Item>
+            <Form.Item name="note" label="备注" {...formItemLayout}>
+                <TextArea allowClear />
+            </Form.Item>
+        </div>
+    );
 }
 
 export default IncomeExpendForm;
