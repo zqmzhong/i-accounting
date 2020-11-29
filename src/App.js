@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './home-page/Home.jsx';
-import "./App.scss";
+import "./App.css";
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 

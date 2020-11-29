@@ -9,9 +9,8 @@ function DealTypeTab({ value, onChange }) {
     return (
         <TabWrapper>
             <Radio.Group
-                defaultValue="expend"
                 buttonStyle="solid"
-                value={value}
+                value={value || 'expend'}
                 onChange={onChange}
             >
                 <Radio.Button value="expend"> 支出 </Radio.Button>

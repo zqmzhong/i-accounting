@@ -3,14 +3,13 @@ import { Select } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
-const selectClassName = 'account-select-form-item';
-const AccountSelect = styled(Select)`
-    &.${selectClassName} {
+const Wrapper = styled('div')`
+    .account-select {
         width: calc((100% - 30px) / 2);
     }
-`;
-const ArrowWithSpace = styled(ArrowRightOutlined)`
-    margin: 0 8px;
+    .arrow {
+        margin: 0 8px;
+    }
 `;
 
 function TransferAccountSelector({ value = {}, onChange }) {
@@ -43,23 +42,23 @@ function TransferAccountSelector({ value = {}, onChange }) {
     }
 
     return (
-        <div>
-            <AccountSelect
+        <Wrapper>
+            <Select
                 mode='tags'
                 showArrow
+                className='account-select'
                 value={value.payment || payment}
                 onChange={onPaymentChange}
-                className={selectClassName}
             />
-            <ArrowWithSpace />
-            <AccountSelect
+            <ArrowRightOutlined className='arrow' />
+            <Select
                 mode='tags'
                 showArrow
+                className='account-select'
                 value={value.receipt || receipt}
                 onChange={onReceiptChange}
-                className={selectClassName}
             />
-        </div>
+        </Wrapper>
     );
 }
 

@@ -1,14 +1,35 @@
 import React, { useState } from 'react';
 import { useToggle, useRequest } from 'ahooks';
-import { Button, Layout, Menu } from 'antd';
-import { PlusOutlined, UserOutlined } from '@ant-design/icons';
-import Title from '../menu-title/Title';
+import { Layout } from 'antd';
+import styled from 'styled-components';
+import MainMenu from '../components/MainMenu';
 import BillModal from '../bill-modal/BillModal';
 import BillList from '../bill-list/BillList';
-import styles from './Home.module.scss';
 import BASE_URL from '../common/BaseUrl';
 
 const { Header, Content, Footer, Sider } = Layout;
+
+const Wrapper = styled(Layout)`
+    height: 100%;
+
+    .header {
+        background: #fff;
+        padding: 0;
+    }
+
+    .content {
+        margin: 24px 48px 0;
+        .bill-list {
+            padding: 24px;
+            background-color: #fff;
+            border: 1px solid #f0f0f0;
+        }
+    }
+
+    .footer {
+        text-align: center;
+    }
+`;
 
 function Home() {
     const [ isShowBillModal, { toggle: showBillModal }] = useToggle(false);
@@ -29,7 +50,7 @@ function Home() {
     };
 
     return (
-        <Layout className={styles['home-page']}>
+        <Wrapper>
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
@@ -40,56 +61,28 @@ function Home() {
                     console.log(collapsed, type);
                 }}
             >
-                <Title></Title>
-
-                <Button
-                    type="primary"
-                    shape="round"
-                    icon={(<PlusOutlined />)} 
-                    size="large"
-                    onClick={() => showBillModal(true)}
-                >
-                    添加交易
-                </Button>
-
-                <BillModal
-                    visible={isShowBillModal}
-                    billInfo={billInfo}
-                    refreshList={refreshList}
-                    onClose={() => showBillModal(false)}
-                />
-
-                <Menu theme="dark" mode="inline">
-                    <Menu.Item key="1">
-                        <UserOutlined />
-                        <span>nav 1</span>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <UserOutlined />
-                        <span>nav 2</span>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <UserOutlined />
-                        <span>nav 3</span>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                        <UserOutlined />
-                        <span>nav 4</span>
-                    </Menu.Item>
-                </Menu>
+                <MainMenu onModalShow={() => showBillModal(true)} />
             </Sider>
+
             <Layout>
-                <Header className={styles['header']} />
-                <Content className={styles['content']}>
-                    <section className={styles['bill-list']}>
+                <Header className='header' />
+                <Content className='content'>
+                    <section className='bill-list'>
                         <BillList isListLoading={loading} billList={billList} refreshList={refreshList} onEdit={onEdit} />
+                        
+                        <BillModal
+                            visible={isShowBillModal}
+                            billInfo={billInfo}
+                            refreshList={refreshList}
+                            onClose={() => showBillModal(false)}
+                        />
                     </section>
                 </Content>
-                <Footer className={styles['footer']}>
+                <Footer className='footer'>
                     i-accounting ©2020
                 </Footer>
             </Layout>
-        </Layout>
+        </Wrapper>
     );
 }
 
