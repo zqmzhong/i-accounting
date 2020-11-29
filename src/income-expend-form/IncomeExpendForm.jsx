@@ -5,6 +5,7 @@ import TransferAccountSelector from '../components/TransferAccountSelector';
 
 const { TextArea } = Input;
 
+// TODO: account and category should have default options, and support subtype, user can input and add new one
 function IncomeExpendForm(props) {
     const { tabId } = props;
 
@@ -25,7 +26,7 @@ function IncomeExpendForm(props) {
 
     let accountSelector = <Select mode="tags" showArrow onChange={handleChangeAccount} />;
     if (tabId === 'transfer') {
-        accountSelector = <TransferAccountSelector onChange={handleChangeAccount} />;
+        accountSelector = <TransferAccountSelector />;
     }
 
     return (
@@ -33,7 +34,7 @@ function IncomeExpendForm(props) {
             <Form.Item name="amount" label="金额" {...formItemLayout}>
                 <Input prefix="￥" suffix="RMB" />
             </Form.Item>
-            <Form.Item name="account" label="账户" {...formItemLayout}  >
+            <Form.Item name="account" label="账户" {...formItemLayout} >
                 {accountSelector}
             </Form.Item>
             <Form.Item name="category" label="分类" {...formItemLayout}>

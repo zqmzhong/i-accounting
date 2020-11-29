@@ -12,12 +12,16 @@ const ModalContent = styled(Space)`
     width: 100%;
 `;
 
+// TODO: fix error when switch tab(stay data when switch tab, clear data when close modal)
 function BillModal(props) {
     const { visible, billInfo, refreshList, onClose } = props;
+
+    const [ tabId, setTabId ] = useState('expend');
     const [ form ] = Form.useForm();
 
     useEffect(() => {
-        const { amount, category, account, time, note } = billInfo;
+        const { type, amount, category, account, time, note } = billInfo;
+        setTabId(type);
         form.setFieldsValue({
             amount,
             category,
@@ -26,8 +30,6 @@ function BillModal(props) {
             note,
         });
     }, [form, billInfo]);
-
-    const [ tabId, setTabId ] = useState('expend');
 
     const { loading, run } = useRequest((param) => {
         const service = {
@@ -71,7 +73,7 @@ function BillModal(props) {
             onOk={() => form.submit()}
         >
             <ModalContent direction="vertical" size="middle">
-                <DealTypeTab onChange={(e) => setTabId(e.target.value)} />
+                <DealTypeTab value={tabId} onChange={(e) => setTabId(e.target.value)} />
                 <Form form={form} layout={"horizontal"} onFinish={onSubmit}>
                     <IncomeExpendForm tabId={tabId} />
                 </Form>

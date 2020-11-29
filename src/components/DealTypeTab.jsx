@@ -5,12 +5,13 @@ const TabWrapper = styled('div')`
     text-align: center;
 `;
 
-function DealTypeTab({ onChange }) {
+function DealTypeTab({ value, onChange }) {
     return (
         <TabWrapper>
             <Radio.Group
                 defaultValue="expend"
                 buttonStyle="solid"
+                value={value}
                 onChange={onChange}
             >
                 <Radio.Button value="expend"> 支出 </Radio.Button>
