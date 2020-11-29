@@ -1,7 +1,7 @@
 import React from 'react';
 import day from 'dayjs';
 import { Form, Input, DatePicker, Select } from 'antd';
-import TransferAccountSelector from '../components/TransferAccountSelector';
+import TransferAccountSelector from './TransferAccountSelector';
 
 const { TextArea } = Input;
 

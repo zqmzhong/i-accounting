@@ -4,8 +4,8 @@ import { Modal, Form, Space } from 'antd';
 import { isEmpty } from 'lodash';
 import day from 'dayjs';
 import styled from 'styled-components';
-import DealTypeTab from '../components/DealTypeTab';
-import IncomeExpendForm from '../income-expend-form/IncomeExpendForm';
+import DealTypeTab from './DealTypeTab';
+import IncomeExpendForm from './IncomeExpendForm';
 import BASE_URL from '../common/BaseUrl';
 
 const ModalContent = styled(Space)`
@@ -16,8 +16,8 @@ const ModalContent = styled(Space)`
 function BillModal(props) {
     const { visible, billInfo, refreshList, onClose } = props;
 
-    const [ tabId, setTabId ] = useState('expend');
-    const [ form ] = Form.useForm();
+    const [tabId, setTabId] = useState('expend');
+    const [form] = Form.useForm();
 
     useEffect(() => {
         const { type, amount, category, account, time, note } = billInfo;
@@ -36,7 +36,7 @@ function BillModal(props) {
             body: JSON.stringify(param),
             headers: { 'Content-Type': 'application/json' },
         };
-        
+
         if (!isEmpty(billInfo)) {
             return {
                 url: BASE_URL + '/bill/' + billInfo.id,

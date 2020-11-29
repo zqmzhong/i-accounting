@@ -3,8 +3,8 @@ import { useToggle, useRequest } from 'ahooks';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 import MainMenu from '../components/MainMenu';
-import BillModal from '../bill-modal/BillModal';
-import BillList from '../bill-list/BillList';
+import BillModal from '../components/BillModal';
+import BillList from '../components/BillList';
 import BASE_URL from '../common/BaseUrl';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -32,10 +32,10 @@ const Wrapper = styled(Layout)`
 `;
 
 function Home() {
-    const [ isShowBillModal, { toggle: showBillModal }] = useToggle(false);
-    const [ billInfo, setBillInfo ] = useState({});
+    const [isShowBillModal, { toggle: showBillModal }] = useToggle(false);
+    const [billInfo, setBillInfo] = useState({});
 
-    const [ billList, setBillList ] = useState([]);
+    const [billList, setBillList] = useState([]);
 
     const { loading, run: refreshList } = useRequest(() => ({
         url: BASE_URL + '/bills',
@@ -69,7 +69,7 @@ function Home() {
                 <Content className='content'>
                     <section className='bill-list'>
                         <BillList isListLoading={loading} billList={billList} refreshList={refreshList} onEdit={onEdit} />
-                        
+
                         <BillModal
                             visible={isShowBillModal}
                             billInfo={billInfo}
