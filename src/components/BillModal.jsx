@@ -3,7 +3,7 @@ import { useRequest } from 'ahooks';
 import { Modal, Form, Space } from 'antd';
 import { isEmpty } from 'lodash';
 import day from 'dayjs';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import DealTypeTab from './DealTypeTab';
 import IncomeExpendForm from './IncomeExpendForm';
 import BASE_URL from '../common/BaseUrl';

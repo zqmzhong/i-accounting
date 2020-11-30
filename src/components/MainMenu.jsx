@@ -1,6 +1,6 @@
 import { Button, Dropdown, Menu, Typography } from 'antd';
 import { PlusOutlined, UserOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 const Wrapper = styled('div')`
     text-align: center;

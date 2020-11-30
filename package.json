@@ -20,10 +20,16 @@
   },
   "devDependencies": {
     "antd-dayjs-webpack-plugin": "^1.0.1",
+    "babel-plugin-macros": "^3.0.0",
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.1.6",
     "react-scripts": "^4.0.0",
     "source-map-explorer": "^2.5.0"
+  },
+  "babel": {
+    "plugins": [
+      "babel-plugin-macros"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

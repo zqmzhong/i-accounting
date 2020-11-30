@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useToggle, useRequest } from 'ahooks';
 import { Layout } from 'antd';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import MainMenu from '../components/MainMenu';
 import BillModal from '../components/BillModal';
 import BillList from '../components/BillList';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 const Wrapper = styled('div')`
     .account-select {
