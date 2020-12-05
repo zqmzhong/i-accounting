@@ -1,0 +1,21 @@
+{
+    "accounts": [],
+    "category": [
+        {
+            "id": 1,
+            "value": "catering",
+            "title": "餐饮"
+        },
+        {
+            "pId": 1,
+            "id": 3,
+            "value": "meal",
+            "title": "三餐"
+        },
+        {
+            "id": 2,
+            "value": "shopping",
+            "title": "购物"
+        }
+    ]
+}
