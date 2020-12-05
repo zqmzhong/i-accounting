@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Select } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import CategorySelector from './CategorySelector';
 import styled from 'styled-components/macro';
 
 const Wrapper = styled('div')`
-    .account-select {
+    .ant-select.ant-tree-select {
         width: calc((100% - 30px) / 2);
     }
     .arrow {
@@ -12,10 +12,9 @@ const Wrapper = styled('div')`
     }
 `;
 
-function TransferAccountSelector({ value = {}, onChange }) {
-    // TODO: for transfer, payment and receipt account should be single select(remove mode='tags')
-    const [ payment, setPayment ] = useState([]);
-    const [ receipt, setReceipt ] = useState([]);
+function TransferAccountSelector({ value = {}, onChange, onAddNew }) {
+    const [payment, setPayment] = useState([]);
+    const [receipt, setReceipt] = useState([]);
 
     const triggerChange = (changedValue) => {
         if (onChange) {
@@ -43,20 +42,20 @@ function TransferAccountSelector({ value = {}, onChange }) {
 
     return (
         <Wrapper>
-            <Select
-                mode='tags'
-                showArrow
-                className='account-select'
+            <CategorySelector
                 value={value.payment || payment}
+                type="accounts"
+                newItemText="创建新账户"
                 onChange={onPaymentChange}
+                onAddNew={onAddNew}
             />
             <ArrowRightOutlined className='arrow' />
-            <Select
-                mode='tags'
-                showArrow
-                className='account-select'
+            <CategorySelector
                 value={value.receipt || receipt}
+                type="accounts"
+                newItemText="创建新账户"
                 onChange={onReceiptChange}
+                onAddNew={onAddNew}
             />
         </Wrapper>
     );
