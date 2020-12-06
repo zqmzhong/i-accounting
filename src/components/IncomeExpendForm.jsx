@@ -1,14 +1,16 @@
-import React from 'react';
-import day from 'dayjs';
 import { Form, Input, DatePicker } from 'antd';
+import { useToggle } from 'ahooks';
+import day from 'dayjs';
 import CategorySelector from './CategorySelector';
 import TransferAccountSelector from './TransferAccountSelector';
+import AccountModal from './AccountModal';
 
 const { TextArea } = Input;
 
 // TODO: user can input and add new account or category
 function IncomeExpendForm(props) {
     const { tabId } = props;
+    const [isShowAccountModal, { toggle: showAccountModal }] = useToggle(false);
 
     const formItemLayout = {
         labelCol: { span: 4 },
@@ -19,6 +21,7 @@ function IncomeExpendForm(props) {
 
     const handleAddCategory = (value) => {
         // TODO: support add new category item
+        showAccountModal(true);
     };
 
     const handleAddAccount = (value) => {
@@ -47,6 +50,8 @@ function IncomeExpendForm(props) {
             <Form.Item name="note" label="备注" {...formItemLayout}>
                 <TextArea allowClear />
             </Form.Item>
+
+            <AccountModal visible={isShowAccountModal} onClose={() => showAccountModal(false)} />
         </div>
     );
 }

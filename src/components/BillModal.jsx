@@ -64,9 +64,8 @@ function BillModal(props) {
 
     return (
         <Modal
-            getContainer={false}
-            destroyOnClose={false}
             title="添加交易"
+            destroyOnClose={true}
             visible={visible}
             confirmLoading={loading}
             onCancel={() => onClose()}
