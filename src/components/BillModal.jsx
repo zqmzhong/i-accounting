@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRequest } from 'ahooks';
 import { Modal, Form, Space } from 'antd';
-import { isEmpty } from 'lodash';
 import day from 'dayjs';
 import styled from 'styled-components/macro';
 import DealTypeTab from './DealTypeTab';
@@ -37,7 +36,7 @@ function BillModal(props) {
             headers: { 'Content-Type': 'application/json' },
         };
 
-        if (!isEmpty(billInfo)) {
+        if (Object.keys(billInfo) !== 0) {
             return {
                 url: BASE_URL + '/bill/' + billInfo.id,
                 method: 'put',
