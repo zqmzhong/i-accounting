@@ -25,7 +25,7 @@ function Login() {
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
         try {
-            await Auth.signIn(values.email, values.password);
+            await Auth.signIn(values.username, values.password);
             console.log("Logged in");
         } catch (e) {
             console.error(e.message);

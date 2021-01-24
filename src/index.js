@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
 import './index.css';
 import App from './App';
@@ -32,7 +33,9 @@ Amplify.configure({
 
 ReactDOM.render(
   <React.Fragment>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.Fragment>,
   document.getElementById('root')
 );
