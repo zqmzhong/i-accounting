@@ -1,7 +1,9 @@
 import { Auth } from "aws-amplify";
+import { useHistory } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import styled from 'styled-components/macro';
+import { useAppContext } from "../libs/contextLib";
 
 const Wrapper = styled('div')`
     height: 100%;
@@ -22,11 +24,16 @@ const Wrapper = styled('div')`
 
 
 function Login() {
+    const history = useHistory();
+    const { userHasAuthenticated } = useAppContext();
+
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
         try {
             await Auth.signIn(values.username, values.password);
             console.log("Logged in");
+            userHasAuthenticated(true);
+            history.push("/");
         } catch (e) {
             console.error(e.message);
         }
@@ -72,7 +79,7 @@ function Login() {
                     <Form.Item name="remember" valuePropName="checked" noStyle>
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
-
+                    {/* TODO: 忘记密码 */}
                     <a className="login-form-forgot" href="">Forgot password</a>
                 </Form.Item>
 
@@ -80,6 +87,7 @@ function Login() {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
+                    {/* TODO: 注册页面 */}
                     Or <a href="">register now!</a>
                 </Form.Item>
             </Form>
