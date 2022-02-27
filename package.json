@@ -7,11 +7,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@ionic/core": "^6.0.9",
-    "ionicons": "^6.0.1",
+    "@cloudbase/js-sdk": "^1.7.2",
     "next": "^12.1.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "zarm": "^2.9.13"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
